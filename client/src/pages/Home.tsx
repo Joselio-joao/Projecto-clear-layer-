@@ -19,7 +19,8 @@ const assets = {
   v1Rimless: asset("clearlayer-v1-rimless-adhesive.png", "/manus-storage/clearlayer-v1-rimless-adhesive_19a56e9b.png"),
   v2Front: asset("clearlayer-v2-front-reference-crop.png", "/manus-storage/clearlayer-v2-front-reference-crop_a0b663ec.png"),
   v2Detail: asset("clearlayer-v2-detail-preformed.png", "/manus-storage/IMG_5131_bef8e37f.JPG"),
-  modelSheet: asset("model-sheet.png", "/manus-storage/9F21138E-9287-401A-8EDC-2414F5540A70_7c4fce9d.png"),
+  profileStrip: asset("clearlayer-profile-strip.png", "/manus-storage/clearlayer-profile-strip_19c21cd6.png"),
+  profileDetail: asset("clearlayer-profile-detail-sheet.png", "/manus-storage/clearlayer-profile-detail-sheet_de69bdd9.png"),
 };
 
 const principles = [
@@ -142,7 +143,7 @@ export default function Home() {
     <section className="profiles-section" id="perfis">
       <div className="section-head"><span>PERFIS DE ARMAÇÃO</span><p>Quatro perfis de referência; quatro decisões que não devem ser tratadas como uma geometria única.</p></div>
       <div className="preference-strip" aria-label="Preferências locais do dossier"><label>Perfil<select value={selectedProfile} onChange={(event) => void persistPreferences({ lastProfile: event.target.value })}><option value="round">Aro redondo</option><option value="square">Aro quadrado</option><option value="aviator">Aviador</option><option value="rimless">Sem aro</option></select></label><label>Versão<select value={productVersion} onChange={(event) => void persistPreferences({ productVersion: event.target.value as "V1" | "V2" })}><option value="V1">V1 adesiva</option><option value="V2">V2 pré-conformada</option></select></label><label>Modo<select value={viewMode} onChange={(event) => void persistPreferences({ viewMode: event.target.value as "technical" | "product" })}><option value="technical">Técnico</option><option value="product">Produto</option></select></label></div>
-      <div className="profile-content"><div className="profile-diagram"><img src={assets.modelSheet} alt="Prancha técnica de quatro perfis de armação" /></div><div className="profile-grid">{profiles.map(([profileId, number, title, status]) => <article className={selectedProfile === profileId ? "is-selected" : ""} key={profileId}><span>{number}</span><h3>{title}</h3><p>{status}</p>{title === "Sem aro" && <small><CircleAlert size={13} /> Sem aperto periférico</small>}</article>)}</div></div>
+      <div className="profile-content"><div className="profile-diagram"><img className="profile-strip" src={assets.profileStrip} alt="Faixa horizontal com vários perfis de armação ClearLayer" /><img className="profile-detail-sheet" src={assets.profileDetail} alt="Prancha detalhada com vistas e detalhes de encaixe dos perfis" /></div><div className="profile-grid">{profiles.map(([profileId, number, title, status]) => <article className={selectedProfile === profileId ? "is-selected" : ""} key={profileId}><span>{number}</span><h3>{title}</h3><p>{status}</p>{title === "Sem aro" && <small><CircleAlert size={13} /> Sem aperto periférico</small>}</article>)}</div></div>
     </section>
 
     <section className="process-section" id="processo">

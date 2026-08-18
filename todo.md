@@ -85,7 +85,11 @@
 - [x] Criar variante estática/documentação de publicação compatível com GitHub Pages, sem depender do backend fullstack.
 - [x] Ampliar IndexedDB para preferências locais do dossier, incluindo preferência de perfil/versão e modo de visualização.
 - [x] Adicionar GitHub Actions para build, auditoria de dependências e publicação segura da variante estática.
-- [ ] Testar as duas variantes e sincronizar os workflows no GitHub; o build local e o workflow de auditoria/build passaram, mas a publicação Pages aguarda ativação administrativa no repositório.
+- [x] Testar as duas variantes e sincronizar os workflows no GitHub; o build local e o workflow de auditoria/build passaram, e a publicação Pages foi concluída após ativação administrativa.
+- [x] Reexecutar o workflow depois da ativação do GitHub Pages e validar o URL público, assets, CSS, IndexedDB e navegação.
+- [ ] Substituir a imagem atual de perfis pela faixa horizontal B8BAC7AE-F2F0-4690-90B9-5992CF6BCFF7.png.
+- [ ] Integrar a prancha detalhada 9F21138E-9287-401A-8EDC-2414F5540A70.png como referência complementar de perfis e encaixes.
+- [ ] Validar enquadramento, responsividade e sincronização da atualização no GitHub Pages.
 - [x] Validar a fidelidade visual da correção antes de entregar uma nova versão.
 - [x] Documentar a revisão visual final do slide atualizado e confirmar a entrega após essa verificação.
 - [x] Aumentar ligeiramente a separação vertical entre o título e o lead do slide de estrutura após a revisão rasterizada.
