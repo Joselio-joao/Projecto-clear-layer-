@@ -1,0 +1,85 @@
+# Evolução ClearLayer — Visualização de Produto
+
+- [x] Definir os quatro perfis de armação e as regras de compatibilidade V1/V2.
+- [x] Criar ativos de produto fiéis à película, à lente e aos modelos de óculos de referência.
+- [x] Implementar visualizador 3D rotativo de lente e película.
+- [x] Implementar galeria de armações com alternância entre V1 e V2.
+- [x] Documentar e aplicar a solução adesiva específica para o modelo sem aro.
+- [x] Validar em desktop e mobile e gerar o pacote ZIP para GitHub.
+- [x] Refinar geometrias, materiais e iluminação dos modelos de óculos 3D.
+- [x] Aplicar fundo cinzento de inspeção na experiência móvel dos óculos.
+- [x] Reequilibrar a versão editorial segundo a regra 60/20/10: branco, preto e azul.
+- [x] Verificar a composição revista em desktop e mobile.
+- [x] Remover os modelos 3D geométricos de armações e respetivas dependências visuais.
+- [x] Criar e organizar imagens de produto em múltiplas vistas para V1 e V2.
+- [x] Reformular a interface como laboratório branco, sem preto como cor secundária.
+- [x] Validar a biblioteca de vistas e a experiência móvel.
+- [x] Corrigir todas as imagens e legendas da V1 para película adesiva sem encaixe periférico.
+- [x] Aplicar o logótipo ClearLayer fornecido como identidade principal do site.
+- [x] Reservar o motivo C técnico para navegação e marca de água, sem substituir o logótipo.
+- [x] Validar a nova leitura da V1 e da marca em desktop e mobile.
+- [x] Criar uma vista 3/4 específica para a V1 adesiva, sem encaixe periférico.
+- [x] Criar as imagens iniciais V2 para armações com aro e película pré-conformada.
+- [x] Atualizar as vistas, estados e legendas V1/V2 no site.
+- [x] Validar a distinção visual entre V1 e V2 em desktop e mobile.
+- [x] Refazer a imagem frontal V2 a partir da referência de contorno pré-conformado.
+- [x] Refazer o detalhe V2 a partir da mesma referência de encaixe discreto no aro.
+- [ ] Refazer a imagem sem aro como V1 adesiva, sem contorno rígido nem contacto com parafusos.
+- [x] Aplicar e validar as três substituições no site.
+- [ ] Corrigir o enquadramento do logótipo para exibir símbolo e wordmark completos, sem recorte.
+- [x] Criar uma imagem frontal própria para a V2 pré-conformada em armação com aro, derivada da prancha de referência fornecida.
+- [x] Substituir o logótipo de navegação por wordmark ClearLayer sem símbolo.
+- [x] Aplicar a linguagem geométrica e espaçada do wordmark aos títulos principais.
+- [x] Validar a legibilidade da nova tipografia e da imagem V2.
+- [x] Reduzir a navegação e a narrativa aos blocos essenciais do produto.
+- [x] Reestruturar a página em hero, princípios, aplicação, perfis e roadmap.
+- [x] Substituir conteúdo genérico por texto técnico curto e correto.
+- [x] Validar a nova hierarquia em desktop e mobile.
+- [x] Definir a narrativa e o sistema visual do PowerPoint ClearLayer.
+- [x] Organizar especificações, materiais, ferramental e esboço V3 Industrial.
+- [x] Redigir e gerar uma apresentação editável de até 12 slides.
+- [x] Rever e entregar o PowerPoint final.
+- [x] Auditar o PDF do primeiro PowerPoint para localizar erros visuais e de conteúdo.
+- [x] Substituir todo o wordmark recriado pelo logótipo ClearLayer fornecido como imagem.
+- [x] Corrigir composição, tipografia e conteúdo técnico no novo deck.
+- [x] Validar e entregar uma apresentação PowerPoint corrigida.
+- [x] Rever a apresentação com diversidade real de imagens por slide, evitando repetição da mesma prancha técnica.
+- [x] Aumentar significativamente o corpo de texto para leitura em projeção e definir uma hierarquia tipográfica mais clara.
+- [x] Reorganizar o espaço próprio de cada slide para separar títulos, subtítulos, conteúdo e imagens sem colisões nem compressão.
+- [x] Verificar visualmente todos os slides e gerar uma nova versão editável da apresentação.
+- [x] Substituir imagens repetidas no deck por ativos distintos ou justificar tecnicamente cada reutilização remanescente.
+- [x] Produzir evidência verificável de revisão visual slide a slide.
+- [x] Ajustar layouts após a revisão visual comprovada e concluir a validação final.
+- [x] Substituir ou justificar explicitamente, slide a slide, todas as imagens ainda repetidas no deck final.
+- [x] Reexportar o deck final após as últimas correções e registar uma revisão visual final confirmando capa, V2 e validação sem colisões.
+- [x] Integrar as novas imagens fornecidas: sem aro, V1, V2, vistas da película e prancha técnica V3.
+- [x] Aumentar a tipografia mantendo coerência entre título, subtítulo, corpo e legendas.
+- [x] Recompor os slides para criar harmonia visual e diversidade de imagens sem perder o sistema branco/azul ClearLayer.
+- [x] Verificar a nova versão editável em projeção e entregar o deck atualizado.
+- [x] Exportar a versão final com as novas imagens e registar uma revisão visual em projeção dos slides críticos.
+- [x] Rever explicitamente o slide de validação/sem aro no deck final e documentar a ausência de colisões.
+- [x] Recortar as fotografias de produto para remover margens vazias e enquadrar cada armação de forma consistente.
+- [x] Remover ou neutralizar fundos que não pertencem ao sistema White Lab e normalizar a escala dos produtos.
+- [x] Aplicar o logótipo oficial com recorte limpo, sem excesso de fundo branco, na apresentação.
+- [x] Substituir os ativos tratados nos slides e validar novamente a composição em projeção.
+- [x] Rever no PDF final todas as páginas com ativos tratados, incluindo V1, V2, validação/sem aro, V3, ferramental, arquitetura, perfis, capa e fecho.
+- [x] Documentar enquadramento, fundo limpo e escala coerente dos ativos em cada página revista.
+- [x] Corrigir a sobreposição entre título e lead no slide de arquitetura identificada na revisão exportada.
+- [x] Corrigir a sobreposição entre a linha temporal e os rótulos do roadmap identificada na revisão exportada.
+- [x] Analisar o PowerPoint fornecido e localizar o slide correspondente à secção “02 / Estrutura”.
+- [x] Integrar no slide o conteúdo técnico sobre camadas, funções e espessuras sem reduzir a legibilidade.
+- [x] Exportar e rasterizar o slide atualizado de estrutura para comprovar legibilidade, espaçamento e ausência de colisões.
+- [x] Rever a nova versão em projeção e entregar o PowerPoint editável atualizado.
+- [x] Confirmar ao utilizador a entrega da versão final após a revisão rasterizada do slide 02 / Estrutura.
+- [x] Reverter a composição excessivamente alterada do slide de estrutura e voltar à hierarquia visual da referência enviada.
+- [x] Inserir apenas o conteúdo técnico compatível com a composição original, sem deslocar a imagem principal nem criar um novo layout.
+- [x] Colocar o conteúdo técnico aprofundado nas notas do slide 02 / Estrutura, preservando integralmente a composição visual da referência.
+- [ ] Atualizar o site ClearLayer para refletir a composição, linguagem e conteúdo técnico do PowerPoint.
+- [ ] Implementar IndexedDB local para preferências e estado técnico do dossier, sem armazenar dados pessoais.
+- [ ] Excluir qualquer integração com YouTube do escopo do site.
+- [ ] Inspecionar o repositório GitHub Joselio-joao/Projecto-clear-layer- e preparar a sincronização do site.
+- [ ] Validar build, dependências, segurança básica e compatibilidade com GitHub Pages.
+- [ ] Sincronizar a versão aprovada do site com o repositório GitHub e entregar a referência publicada.
+- [x] Validar a fidelidade visual da correção antes de entregar uma nova versão.
+- [x] Documentar a revisão visual final do slide atualizado e confirmar a entrega após essa verificação.
+- [x] Aumentar ligeiramente a separação vertical entre o título e o lead do slide de estrutura após a revisão rasterizada.
