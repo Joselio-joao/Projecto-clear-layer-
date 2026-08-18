@@ -7,7 +7,7 @@ import { ArrowDownRight, CircleAlert, Layers3, ScanLine, Wrench } from "lucide-r
 import { clearDossierState, readDossierState, writeDossierState } from "@/lib/clearLayerDb";
 
 const isStaticBuild = import.meta.env.VITE_GITHUB_PAGES === "true";
-const asset = (filename: string, storagePath: string) => isStaticBuild ? `${import.meta.env.BASE_URL}assets/${filename}` : storagePath;
+const asset = (filename: string, storagePath: string) => isStaticBuild ? `${import.meta.env.BASE_URL}${filename}` : storagePath;
 
 const assets = {
   wordmark: asset("clearlayer-wordmark.png", "/manus-storage/clearlayer-wordmark_be6a4db4.png"),
@@ -29,10 +29,10 @@ const principles = [
 ];
 
 const profiles = [
-  ["01", "Aro redondo", "V1 adesiva · V2 a validar"],
-  ["02", "Aro quadrado", "V1 adesiva · V2 a validar"],
-  ["03", "Aviador", "V1 adesiva · V2 a validar"],
-  ["04", "Sem aro", "Apenas V1 adesiva"],
+  ["round", "01", "Aro redondo", "V1 adesiva · V2 a validar"],
+  ["square", "02", "Aro quadrado", "V1 adesiva · V2 a validar"],
+  ["aviator", "03", "Aviador", "V1 adesiva · V2 a validar"],
+  ["rimless", "04", "Sem aro", "Apenas V1 adesiva"],
 ];
 
 function scrollTo(id: string) {
@@ -91,7 +91,7 @@ export default function Home() {
     setLocalStatus(cleared ? "ready" : "unavailable");
   };
 
-  return <main className="precision-site">
+  return <main className={`precision-site view-${viewMode} version-${productVersion.toLowerCase()}`} data-selected-profile={selectedProfile}>
     <header className="precision-header">
       <a className="precision-wordmark" href="#top" aria-label="ClearLayer — início"><img src={assets.wordmark} alt="ClearLayer" /></a>
       <nav aria-label="Navegação principal"><a href="#produto" onClick={() => void rememberSection("produto")}>Produto</a><a href="#imagens" onClick={() => void rememberSection("imagens")}>Imagens</a><a href="#perfis" onClick={() => void rememberSection("perfis")}>Perfis</a><a href="#processo" onClick={() => void rememberSection("processo")}>Processo</a></nav>
@@ -142,7 +142,7 @@ export default function Home() {
     <section className="profiles-section" id="perfis">
       <div className="section-head"><span>PERFIS DE ARMAÇÃO</span><p>Quatro perfis de referência; quatro decisões que não devem ser tratadas como uma geometria única.</p></div>
       <div className="preference-strip" aria-label="Preferências locais do dossier"><label>Perfil<select value={selectedProfile} onChange={(event) => void persistPreferences({ lastProfile: event.target.value })}><option value="round">Aro redondo</option><option value="square">Aro quadrado</option><option value="aviator">Aviador</option><option value="rimless">Sem aro</option></select></label><label>Versão<select value={productVersion} onChange={(event) => void persistPreferences({ productVersion: event.target.value as "V1" | "V2" })}><option value="V1">V1 adesiva</option><option value="V2">V2 pré-conformada</option></select></label><label>Modo<select value={viewMode} onChange={(event) => void persistPreferences({ viewMode: event.target.value as "technical" | "product" })}><option value="technical">Técnico</option><option value="product">Produto</option></select></label></div>
-      <div className="profile-content"><div className="profile-diagram"><img src={assets.modelSheet} alt="Prancha técnica de quatro perfis de armação" /></div><div className="profile-grid">{profiles.map(([number, title, status]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{status}</p>{title === "Sem aro" && <small><CircleAlert size={13} /> Sem aperto periférico</small>}</article>)}</div></div>
+      <div className="profile-content"><div className="profile-diagram"><img src={assets.modelSheet} alt="Prancha técnica de quatro perfis de armação" /></div><div className="profile-grid">{profiles.map(([profileId, number, title, status]) => <article className={selectedProfile === profileId ? "is-selected" : ""} key={profileId}><span>{number}</span><h3>{title}</h3><p>{status}</p>{title === "Sem aro" && <small><CircleAlert size={13} /> Sem aperto periférico</small>}</article>)}</div></div>
     </section>
 
     <section className="process-section" id="processo">

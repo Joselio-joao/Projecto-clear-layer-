@@ -217,6 +217,7 @@ export default defineConfig({
   },
   envDir: path.resolve(import.meta.dirname),
   root: path.resolve(import.meta.dirname, "client"),
+  publicDir: isGitHubPagesBuild ? path.resolve(import.meta.dirname, "static-assets") : path.resolve(import.meta.dirname, "client/public"),
   base: isGitHubPagesBuild ? "/Projecto-clear-layer-/" : "/",
   build: {
     outDir: path.resolve(import.meta.dirname, isGitHubPagesBuild ? "dist-pages" : "dist/public"),
