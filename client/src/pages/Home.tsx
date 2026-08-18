@@ -6,17 +6,20 @@ import { useEffect, useState } from "react";
 import { ArrowDownRight, CircleAlert, Layers3, ScanLine, Wrench } from "lucide-react";
 import { clearDossierState, readDossierState, writeDossierState } from "@/lib/clearLayerDb";
 
+const isStaticBuild = import.meta.env.VITE_GITHUB_PAGES === "true";
+const asset = (filename: string, storagePath: string) => isStaticBuild ? `${import.meta.env.BASE_URL}assets/${filename}` : storagePath;
+
 const assets = {
-  wordmark: "/manus-storage/clearlayer-wordmark_be6a4db4.png",
-  fullLogo: "/manus-storage/clearlayer-logo-reference_3f7853ba.JPG",
-  blueprint: "/manus-storage/F74375B7-C9E2-4F8B-AB39-CB5C38626469_1f13939c.png",
-  structure: "/manus-storage/IMG_5163_da3ff018.JPG",
-  v1Front: "/manus-storage/clearlayer-v1-frontal-adhesive_e4cabf48.png",
-  v1ThreeQuarter: "/manus-storage/clearlayer-v1-threequarter-correct_20238ed5.png",
-  v1Rimless: "/manus-storage/clearlayer-v1-rimless-adhesive_19a56e9b.png",
-  v2Front: "/manus-storage/clearlayer-v2-front-reference-crop_a0b663ec.png",
-  v2Detail: "/manus-storage/IMG_5131_bef8e37f.JPG",
-  modelSheet: "/manus-storage/9F21138E-9287-401A-8EDC-2414F5540A70_7c4fce9d.png",
+  wordmark: asset("clearlayer-wordmark.png", "/manus-storage/clearlayer-wordmark_be6a4db4.png"),
+  fullLogo: asset("clearlayer-logo-reference.JPG", "/manus-storage/clearlayer-logo-reference_3f7853ba.JPG"),
+  blueprint: asset("blueprint.png", "/manus-storage/F74375B7-C9E2-4F8B-AB39-CB5C38626469_1f13939c.png"),
+  structure: asset("structure.jpg", "/manus-storage/IMG_5163_da3ff018.JPG"),
+  v1Front: asset("clearlayer-v1-frontal-adhesive.png", "/manus-storage/clearlayer-v1-frontal-adhesive_e4cabf48.png"),
+  v1ThreeQuarter: asset("clearlayer-v1-threequarter-correct.png", "/manus-storage/clearlayer-v1-threequarter-correct_20238ed5.png"),
+  v1Rimless: asset("clearlayer-v1-rimless-adhesive.png", "/manus-storage/clearlayer-v1-rimless-adhesive_19a56e9b.png"),
+  v2Front: asset("clearlayer-v2-front-reference-crop.png", "/manus-storage/clearlayer-v2-front-reference-crop_a0b663ec.png"),
+  v2Detail: asset("clearlayer-v2-detail-preformed.png", "/manus-storage/IMG_5131_bef8e37f.JPG"),
+  modelSheet: asset("model-sheet.png", "/manus-storage/9F21138E-9287-401A-8EDC-2414F5540A70_7c4fce9d.png"),
 };
 
 const principles = [
@@ -39,6 +42,9 @@ function scrollTo(id: string) {
 export default function Home() {
   const [localStatus, setLocalStatus] = useState<"loading" | "ready" | "unavailable">("loading");
   const [lastSection, setLastSection] = useState<string | null>(null);
+  const [selectedProfile, setSelectedProfile] = useState("round");
+  const [productVersion, setProductVersion] = useState<"V1" | "V2">("V1");
+  const [viewMode, setViewMode] = useState<"technical" | "product">("technical");
 
   const sectionLabels: Record<string, string> = {
     produto: "Produto",
@@ -52,6 +58,9 @@ export default function Home() {
     void readDossierState().then((state) => {
       if (!active) return;
       setLastSection(state?.lastSection ?? null);
+      setSelectedProfile(state?.lastProfile ?? "round");
+      setProductVersion(state?.productVersion ?? "V1");
+      setViewMode(state?.viewMode ?? "technical");
       setLocalStatus("ready");
     });
     return () => {
@@ -59,15 +68,26 @@ export default function Home() {
     };
   }, []);
 
-  const rememberSection = async (section: string) => {
-    setLastSection(section);
-    const saved = await writeDossierState({ lastSection: section });
+  const persistPreferences = async (patch: { lastSection?: string; lastProfile?: string; productVersion?: "V1" | "V2"; viewMode?: "technical" | "product" }) => {
+    const next = { lastSection: lastSection ?? undefined, lastProfile: selectedProfile, productVersion, viewMode, ...patch };
+    if (patch.lastSection) setLastSection(patch.lastSection);
+    if (patch.lastProfile) setSelectedProfile(patch.lastProfile);
+    if (patch.productVersion) setProductVersion(patch.productVersion);
+    if (patch.viewMode) setViewMode(patch.viewMode);
+    const saved = await writeDossierState(next);
     setLocalStatus(saved ? "ready" : "unavailable");
   };
 
+  const rememberSection = async (section: string) => persistPreferences({ lastSection: section });
+
   const clearLocalMemory = async () => {
     const cleared = await clearDossierState();
-    if (cleared) setLastSection(null);
+    if (cleared) {
+      setLastSection(null);
+      setSelectedProfile("round");
+      setProductVersion("V1");
+      setViewMode("technical");
+    }
     setLocalStatus(cleared ? "ready" : "unavailable");
   };
 
@@ -121,6 +141,7 @@ export default function Home() {
 
     <section className="profiles-section" id="perfis">
       <div className="section-head"><span>PERFIS DE ARMAÇÃO</span><p>Quatro perfis de referência; quatro decisões que não devem ser tratadas como uma geometria única.</p></div>
+      <div className="preference-strip" aria-label="Preferências locais do dossier"><label>Perfil<select value={selectedProfile} onChange={(event) => void persistPreferences({ lastProfile: event.target.value })}><option value="round">Aro redondo</option><option value="square">Aro quadrado</option><option value="aviator">Aviador</option><option value="rimless">Sem aro</option></select></label><label>Versão<select value={productVersion} onChange={(event) => void persistPreferences({ productVersion: event.target.value as "V1" | "V2" })}><option value="V1">V1 adesiva</option><option value="V2">V2 pré-conformada</option></select></label><label>Modo<select value={viewMode} onChange={(event) => void persistPreferences({ viewMode: event.target.value as "technical" | "product" })}><option value="technical">Técnico</option><option value="product">Produto</option></select></label></div>
       <div className="profile-content"><div className="profile-diagram"><img src={assets.modelSheet} alt="Prancha técnica de quatro perfis de armação" /></div><div className="profile-grid">{profiles.map(([number, title, status]) => <article key={number}><span>{number}</span><h3>{title}</h3><p>{status}</p>{title === "Sem aro" && <small><CircleAlert size={13} /> Sem aperto periférico</small>}</article>)}</div></div>
     </section>
 

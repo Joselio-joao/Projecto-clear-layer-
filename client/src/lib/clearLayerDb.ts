@@ -1,10 +1,12 @@
 export const CLEARLAYER_DB_NAME = "clearlayer-local";
-export const CLEARLAYER_DB_VERSION = 1;
+export const CLEARLAYER_DB_VERSION = 2;
 export const CLEARLAYER_STORE_NAME = "dossier-state";
 
 export type DossierState = {
   lastSection?: string;
   lastProfile?: string;
+  productVersion?: "V1" | "V2";
+  viewMode?: "technical" | "product";
   updatedAt: number;
 };
 
@@ -36,6 +38,7 @@ export async function readDossierState(): Promise<DossierState | null> {
       request.onsuccess = () => resolve((request.result as DossierState | undefined) ?? null);
       request.onerror = () => reject(request.error ?? new Error("Não foi possível ler o estado local."));
       transaction.oncomplete = () => database.close();
+      transaction.onerror = () => database.close();
     });
   } catch {
     return null;
@@ -52,7 +55,10 @@ export async function writeDossierState(state: Omit<DossierState, "updatedAt">):
         database.close();
         resolve(true);
       };
-      transaction.onerror = () => reject(transaction.error ?? new Error("Não foi possível guardar o estado local."));
+      transaction.onerror = () => {
+        database.close();
+        reject(transaction.error ?? new Error("Não foi possível guardar o estado local."));
+      };
     });
   } catch {
     return false;
@@ -69,7 +75,10 @@ export async function clearDossierState(): Promise<boolean> {
         database.close();
         resolve(true);
       };
-      transaction.onerror = () => reject(transaction.error ?? new Error("Não foi possível limpar o estado local."));
+      transaction.onerror = () => {
+        database.close();
+        reject(transaction.error ?? new Error("Não foi possível limpar o estado local."));
+      };
     });
   } catch {
     return false;

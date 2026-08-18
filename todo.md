@@ -82,6 +82,10 @@
 - [x] Inspecionar o repositório GitHub Joselio-joao/Projecto-clear-layer- e preparar a sincronização do site.
 - [x] Validar build, dependências, segurança básica e documentar a limitação de GitHub Pages para o backend.
 - [x] Sincronizar a versão aprovada do site com o repositório GitHub e entregar a referência publicada.
+- [ ] Criar variante estática/documentação de publicação compatível com GitHub Pages, sem depender do backend fullstack.
+- [ ] Ampliar IndexedDB para preferências locais do dossier, incluindo preferência de perfil/versão e modo de visualização.
+- [ ] Adicionar GitHub Actions para build, auditoria de dependências e publicação segura da variante estática.
+- [ ] Testar as duas variantes, sincronizar os workflows no GitHub e guardar novo checkpoint.
 - [x] Validar a fidelidade visual da correção antes de entregar uma nova versão.
 - [x] Documentar a revisão visual final do slide atualizado e confirmar a entrega após essa verificação.
 - [x] Aumentar ligeiramente a separação vertical entre o título e o lead do slide de estrutura após a revisão rasterizada.
