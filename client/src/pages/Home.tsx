@@ -8,6 +8,7 @@ import { clearDossierState, readDossierState, writeDossierState } from "@/lib/cl
 
 const assets = {
   wordmark: "/manus-storage/clearlayer-wordmark_be6a4db4.png",
+  fullLogo: "/manus-storage/clearlayer-logo-reference_3f7853ba.JPG",
   blueprint: "/manus-storage/F74375B7-C9E2-4F8B-AB39-CB5C38626469_1f13939c.png",
   structure: "/manus-storage/IMG_5163_da3ff018.JPG",
   v1Front: "/manus-storage/clearlayer-v1-frontal-adhesive_e4cabf48.png",
@@ -134,6 +135,7 @@ export default function Home() {
     </section>
 
     <section className="final-statement"><h2>Uma camada mais clara<br />sobre o processo.</h2><button className="primary-button" onClick={() => scrollTo("top")}>Voltar ao início <ArrowDownRight size={16} /></button></section>
-    <footer><img src={assets.wordmark} alt="ClearLayer" /><span>ESTADO · EM DESENVOLVIMENTO</span><span>PORTUGAL · 2026</span><span className="local-status" aria-live="polite">{localStatus === "ready" ? "MEMÓRIA LOCAL · INDEXEDDB" : localStatus === "loading" ? "MEMÓRIA LOCAL · A VERIFICAR" : "MEMÓRIA LOCAL · INDISPONÍVEL"}</span>{lastSection && <span>ÚLTIMA SECÇÃO · {sectionLabels[lastSection] ?? lastSection}</span>}<button className="local-clear" type="button" onClick={() => void clearLocalMemory()}>Limpar estado local</button></footer>
+    <footer><div className="footer-brand"><img className="footer-wordmark" src={assets.wordmark} alt="ClearLayer" /><img className="footer-full-logo" src={assets.fullLogo} alt="ClearLayer — símbolo e wordmark" /></div><span>ESTADO · EM DESENVOLVIMENTO</span>
+<span>PORTUGAL · 2026</span><span className="local-status" aria-live="polite">{localStatus === "ready" ? "MEMÓRIA LOCAL · INDEXEDDB" : localStatus === "loading" ? "MEMÓRIA LOCAL · A VERIFICAR" : "MEMÓRIA LOCAL · INDISPONÍVEL"}</span>{lastSection && <span>ÚLTIMA SECÇÃO · {sectionLabels[lastSection] ?? lastSection}</span>}<button className="local-clear" type="button" onClick={() => void clearLocalMemory()}>Limpar estado local</button></footer>
   </main>;
 }

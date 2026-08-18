@@ -24,9 +24,11 @@
 - [x] Validar a distinção visual entre V1 e V2 em desktop e mobile.
 - [x] Refazer a imagem frontal V2 a partir da referência de contorno pré-conformado.
 - [x] Refazer o detalhe V2 a partir da mesma referência de encaixe discreto no aro.
-- [ ] Refazer a imagem sem aro como V1 adesiva, sem contorno rígido nem contacto com parafusos.
+- [x] Refazer a imagem sem aro como V1 adesiva, sem contorno rígido nem contacto com parafusos.
 - [x] Aplicar e validar as três substituições no site.
-- [ ] Corrigir o enquadramento do logótipo para exibir símbolo e wordmark completos, sem recorte.
+- [x] Corrigir o enquadramento do logótipo para exibir símbolo e wordmark completos, sem recorte.
+- [x] Verificar visualmente o ativo sem aro V1 usado no site e documentar que não apresenta contorno rígido nem contacto com parafusos.
+- [x] Clarificar e validar a regra de marca: wordmark na navegação; símbolo + wordmark completo apenas nos contextos em que o ativo oficial completo é usado.
 - [x] Criar uma imagem frontal própria para a V2 pré-conformada em armação com aro, derivada da prancha de referência fornecida.
 - [x] Substituir o logótipo de navegação por wordmark ClearLayer sem símbolo.
 - [x] Aplicar a linguagem geométrica e espaçada do wordmark aos títulos principais.
