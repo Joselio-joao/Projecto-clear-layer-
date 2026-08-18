@@ -15,3 +15,7 @@
 
 /* Desktop safeguard: the extended display face must never clip a key product claim. */
 @media(min-width:901px){.precision-hero{grid-template-columns:45% 55%}.hero-copy h1{font-size:clamp(29px,2.55vw,38px);line-height:1.12;letter-spacing:-.04em}}
+
+/* Image reduction: only the approved technical layer image remains visible. */
+.text-wordmark{font:400 18px "Michroma",sans-serif;letter-spacing:.12em;color:var(--ink);text-decoration:none}.drawing-placeholder,.image-board-empty,.profile-diagram-empty{display:grid;place-items:center;color:#82939d;font:10px "DM Mono",monospace;letter-spacing:.1em}.drawing-placeholder{min-height:300px;padding:30px;text-align:center}.image-board-empty{min-height:180px;border:1px dashed var(--line);background:#fbfcfd}.profile-diagram-empty{min-height:260px;background:#fbfcfd}.lens-section-image img{width:94%;height:auto;max-height:520px;object-fit:contain;mix-blend-mode:normal;filter:none}.precision-wordmark img,footer img{display:none}
+@media(max-width:560px){.text-wordmark{font-size:14px}.drawing-placeholder{min-height:220px}.lens-section-image{min-height:0;padding:20px 0}.lens-section-image img{width:100%;max-height:none}.profile-diagram-empty{min-height:180px}}
