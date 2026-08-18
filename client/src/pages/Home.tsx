@@ -8,8 +8,32 @@ import { clearDossierState, readDossierState, writeDossierState } from "@/lib/cl
 
 const isStaticBuild = import.meta.env.VITE_GITHUB_PAGES === "true";
 const asset = (filename: string, storagePath: string) => isStaticBuild ? `${import.meta.env.BASE_URL}${filename}` : storagePath;
+const responsiveAsset = (base: string, storage800: string, storage1600: string) => ({
+  src: asset(`${base}-1600w.webp`, storage1600),
+  srcSet: isStaticBuild
+    ? `${import.meta.env.BASE_URL}${base}-800w.webp 800w, ${import.meta.env.BASE_URL}${base}-1600w.webp 1600w`
+    : `${storage800} 800w, ${storage1600} 1600w`,
+});
+
 const assets = {
-  structure: asset("clearlayer-structure-approved.png", "/manus-storage/clearlayer-structure-approved.png"),
+  wordmark: asset("clearlayer-wordmark.png", "/manus-storage/clearlayer-wordmark_be6a4db4.png"),
+  fullLogo: asset("clearlayer-logo-reference.JPG", "/manus-storage/clearlayer-logo-reference_3f7853ba.JPG"),
+  blueprint: asset("blueprint.png", "/manus-storage/F74375B7-C9E2-4F8B-AB39-CB5C38626469_1f13939c.png"),
+  structure: asset("structure.jpg", "/manus-storage/IMG_5163_da3ff018.JPG"),
+  v1Front: asset("clearlayer-v1-frontal-adhesive.png", "/manus-storage/clearlayer-v1-frontal-adhesive_e4cabf48.png"),
+  v1ThreeQuarter: asset("clearlayer-v1-threequarter-correct.png", "/manus-storage/clearlayer-v1-threequarter-correct_20238ed5.png"),
+  v1Rimless: asset("clearlayer-v1-rimless-adhesive.png", "/manus-storage/clearlayer-v1-rimless-adhesive_19a56e9b.png"),
+  v2Front: asset("clearlayer-v2-front-reference-crop.png", "/manus-storage/clearlayer-v2-front-reference-crop_a0b663ec.png"),
+  v2Detail: asset("clearlayer-v2-detail-preformed.png", "/manus-storage/IMG_5131_bef8e37f.JPG"),
+  profileImages: {
+    roundV1: responsiveAsset("clearlayer-round-v1", "/manus-storage/clearlayer-round-v1-800w.webp", "/manus-storage/clearlayer-round-v1-1600w.webp"),
+    roundV2: responsiveAsset("clearlayer-round-v2", "/manus-storage/clearlayer-round-v2-800w.webp", "/manus-storage/clearlayer-round-v2-1600w.webp"),
+    squareV1: responsiveAsset("clearlayer-square-v1", "/manus-storage/clearlayer-square-v1-800w.webp", "/manus-storage/clearlayer-square-v1-1600w.webp"),
+    squareV2: responsiveAsset("clearlayer-square-v2", "/manus-storage/clearlayer-square-v2-800w.webp", "/manus-storage/clearlayer-square-v2-1600w.webp"),
+    aviatorV1: responsiveAsset("clearlayer-aviator-v1", "/manus-storage/clearlayer-aviator-v1-800w.webp", "/manus-storage/clearlayer-aviator-v1-1600w.webp"),
+    aviatorV2: responsiveAsset("clearlayer-aviator-v2", "/manus-storage/clearlayer-aviator-v2-800w.webp", "/manus-storage/clearlayer-aviator-v2-1600w.webp"),
+    rimlessV1: responsiveAsset("clearlayer-rimless-v1", "/manus-storage/clearlayer-rimless-v1-800w.webp", "/manus-storage/clearlayer-rimless-v1-1600w.webp"),
+  },
 };
 
 const principles = [
@@ -83,7 +107,7 @@ export default function Home() {
 
   return <main className={`precision-site view-${viewMode} version-${productVersion.toLowerCase()}`} data-selected-profile={selectedProfile}>
     <header className="precision-header">
-      <a className="precision-wordmark text-wordmark" href="#top" aria-label="ClearLayer — início">CLEARLAYER</a>
+      <a className="precision-wordmark" href="#top" aria-label="ClearLayer — início"><img src={assets.wordmark} alt="ClearLayer" /></a>
       <nav aria-label="Navegação principal"><a href="#produto" onClick={() => void rememberSection("produto")}>Produto</a><a href="#imagens" onClick={() => void rememberSection("imagens")}>Imagens</a><a href="#perfis" onClick={() => void rememberSection("perfis")}>Perfis</a><a href="#processo" onClick={() => void rememberSection("processo")}>Processo</a></nav>
       <button className="header-button" onClick={() => scrollTo("imagens")}>Explorar vistas <ArrowDownRight size={14} /></button>
     </header>
@@ -98,8 +122,8 @@ export default function Home() {
       </div>
       <div className="hero-drawing">
         <div className="drawing-grid" />
-        <div className="drawing-placeholder" aria-label="Área de imagens removidas">IMAGENS DE PRODUTO REMOVIDAS</div>
-        <span className="drawing-tag top">IMAGEM REMOVIDA</span><span className="drawing-tag bottom">ESTRUTURA ABAIXO</span>
+        <img src={assets.blueprint} alt="Desenho técnico de uma película transparente aplicada numa lente" />
+        <span className="drawing-tag top">REFERÊNCIA · V1</span><span className="drawing-tag bottom">SUPERFÍCIE ADESIVA</span>
       </div>
     </section>
 
@@ -117,14 +141,22 @@ export default function Home() {
     </section>
 
     <section className="product-images" id="imagens">
-      <div className="section-head"><span>IMAGENS DE PRODUTO</span><p>As imagens de produto foram removidas nesta versão. A única referência visual preservada é a estrutura técnica em camadas.</p></div>
-      <div className="image-board image-board-empty"><p>IMAGENS DE PRODUTO REMOVIDAS</p></div>
+      <div className="section-head"><span>IMAGENS DE PRODUTO</span><p>Vistas de referência para distinguir a aplicação adesiva V1 da solução V2 pré-conformada em armação com aro.</p></div>
+      <div className="image-board">
+        <figure className="image-feature"><img src={assets.v2Front} alt="Vista frontal V2 pré-conformada numa armação de aro completo" /><figcaption><b>V2 · FRENTE</b><span>ARO COMPLETO · CONTORNO PRÉ-CONFORMADO</span></figcaption></figure>
+        <div className="image-grid">
+          <figure><img src={assets.v1Front} alt="V1 adesiva vista frontal" /><figcaption>V1 · FRENTE</figcaption></figure>
+          <figure><img src={assets.v1ThreeQuarter} alt="V1 adesiva vista três quartos" /><figcaption>V1 · VISTA 3/4</figcaption></figure>
+          <figure><img src={assets.v2Detail} alt="Detalhe de aplicação V2 num aro completo" /><figcaption>V2 · DETALHE</figcaption></figure>
+          <figure><img src={assets.v1Rimless} alt="V1 adesiva em armação sem aro" /><figcaption>SEM ARO · V1</figcaption></figure>
+        </div>
+      </div>
     </section>
 
     <section className="profiles-section" id="perfis">
       <div className="section-head"><span>PERFIS DE ARMAÇÃO</span><p>Quatro perfis de referência; quatro decisões que não devem ser tratadas como uma geometria única.</p></div>
       <div className="preference-strip" aria-label="Preferências locais do dossier"><label>Perfil<select value={selectedProfile} onChange={(event) => void persistPreferences({ lastProfile: event.target.value })}><option value="round">Aro redondo</option><option value="square">Aro quadrado</option><option value="aviator">Aviador</option><option value="rimless">Sem aro</option></select></label><label>Versão<select value={productVersion} onChange={(event) => void persistPreferences({ productVersion: event.target.value as "V1" | "V2" })}><option value="V1">V1 adesiva</option><option value="V2">V2 pré-conformada</option></select></label><label>Modo<select value={viewMode} onChange={(event) => void persistPreferences({ viewMode: event.target.value as "technical" | "product" })}><option value="technical">Técnico</option><option value="product">Produto</option></select></label></div>
-      <div className="profile-content"><div className="profile-diagram profile-diagram-empty" aria-label="Imagens individuais dos perfis removidas"><p>IMAGENS DE PERFIS REMOVIDAS</p></div><div className="profile-grid">{profiles.map(([profileId, number, title, status]) => <article className={selectedProfile === profileId ? "is-selected" : ""} key={profileId}><span>{number}</span><h3>{title}</h3><p>{status}</p>{title === "Sem aro" && <small><CircleAlert size={13} /> Sem aperto periférico</small>}</article>)}</div></div>
+      <div className="profile-content"><div className="profile-diagram" aria-label="Imagens individuais dos perfis de armação"><figure><img src={assets.profileImages.roundV1.src} srcSet={assets.profileImages.roundV1.srcSet} sizes="(max-width: 560px) calc(100vw - 48px), (max-width: 900px) calc(100vw - 96px), 42vw" alt="Aro redondo com aplicação V1 adesiva" width="1600" height="900" loading="lazy" decoding="async" /><figcaption>Aro redondo · V1</figcaption></figure><figure><img src={assets.profileImages.roundV2.src} srcSet={assets.profileImages.roundV2.srcSet} sizes="(max-width: 560px) calc(100vw - 48px), (max-width: 900px) calc(100vw - 96px), 42vw" alt="Aro redondo com aplicação V2" width="1600" height="900" loading="lazy" decoding="async" /><figcaption>Aro redondo · V2</figcaption></figure><figure><img src={assets.profileImages.squareV1.src} srcSet={assets.profileImages.squareV1.srcSet} sizes="(max-width: 560px) calc(100vw - 48px), (max-width: 900px) calc(100vw - 96px), 42vw" alt="Aro quadrado com aplicação V1 adesiva" width="1600" height="900" loading="lazy" decoding="async" /><figcaption>Aro quadrado · V1</figcaption></figure><figure><img src={assets.profileImages.squareV2.src} srcSet={assets.profileImages.squareV2.srcSet} sizes="(max-width: 560px) calc(100vw - 48px), (max-width: 900px) calc(100vw - 96px), 42vw" alt="Aro quadrado com aplicação V2" width="1600" height="900" loading="lazy" decoding="async" /><figcaption>Aro quadrado · V2</figcaption></figure><figure><img src={assets.profileImages.aviatorV1.src} srcSet={assets.profileImages.aviatorV1.srcSet} sizes="(max-width: 560px) calc(100vw - 48px), (max-width: 900px) calc(100vw - 96px), 42vw" alt="Aviador com aplicação V1 adesiva" width="1600" height="900" loading="lazy" decoding="async" /><figcaption>Aviador · V1</figcaption></figure><figure><img src={assets.profileImages.aviatorV2.src} srcSet={assets.profileImages.aviatorV2.srcSet} sizes="(max-width: 560px) calc(100vw - 48px), (max-width: 900px) calc(100vw - 96px), 42vw" alt="Aviador com aplicação V2" width="1600" height="900" loading="lazy" decoding="async" /><figcaption>Aviador · V2</figcaption></figure><figure><img src={assets.profileImages.rimlessV1.src} srcSet={assets.profileImages.rimlessV1.srcSet} sizes="(max-width: 560px) calc(100vw - 48px), (max-width: 900px) calc(100vw - 96px), 42vw" alt="Armação sem aro com aplicação V1 adesiva" width="1600" height="900" loading="lazy" decoding="async" /><figcaption>Sem aro · V1</figcaption></figure></div><div className="profile-grid">{profiles.map(([profileId, number, title, status]) => <article className={selectedProfile === profileId ? "is-selected" : ""} key={profileId}><span>{number}</span><h3>{title}</h3><p>{status}</p>{title === "Sem aro" && <small><CircleAlert size={13} /> Sem aperto periférico</small>}</article>)}</div></div>
     </section>
 
     <section className="process-section" id="processo">
@@ -138,7 +170,7 @@ export default function Home() {
     </section>
 
     <section className="final-statement"><h2>Uma camada mais clara<br />sobre o processo.</h2><button className="primary-button" onClick={() => scrollTo("top")}>Voltar ao início <ArrowDownRight size={16} /></button></section>
-    <footer><div className="footer-brand text-wordmark">CLEARLAYER</div><span>ESTADO · EM DESENVOLVIMENTO</span>
+    <footer><div className="footer-brand"><img className="footer-wordmark" src={assets.wordmark} alt="ClearLayer" /><img className="footer-full-logo" src={assets.fullLogo} alt="ClearLayer — símbolo e wordmark" /></div><span>ESTADO · EM DESENVOLVIMENTO</span>
 <span>PORTUGAL · 2026</span><span className="local-status" aria-live="polite">{localStatus === "ready" ? "MEMÓRIA LOCAL · INDEXEDDB" : localStatus === "loading" ? "MEMÓRIA LOCAL · A VERIFICAR" : "MEMÓRIA LOCAL · INDISPONÍVEL"}</span>{lastSection && <span>ÚLTIMA SECÇÃO · {sectionLabels[lastSection] ?? lastSection}</span>}<button className="local-clear" type="button" onClick={() => void clearLocalMemory()}>Limpar estado local</button></footer>
   </main>;
 }
