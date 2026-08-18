@@ -37,11 +37,21 @@ function scrollTo(id: string) {
 
 export default function Home() {
   const [localStatus, setLocalStatus] = useState<"loading" | "ready" | "unavailable">("loading");
+  const [lastSection, setLastSection] = useState<string | null>(null);
+
+  const sectionLabels: Record<string, string> = {
+    produto: "Produto",
+    imagens: "Imagens",
+    perfis: "Perfis",
+    processo: "Processo",
+  };
 
   useEffect(() => {
     let active = true;
-    void readDossierState().then(() => {
-      if (active) setLocalStatus("ready");
+    void readDossierState().then((state) => {
+      if (!active) return;
+      setLastSection(state?.lastSection ?? null);
+      setLocalStatus("ready");
     });
     return () => {
       active = false;
@@ -49,12 +59,14 @@ export default function Home() {
   }, []);
 
   const rememberSection = async (section: string) => {
+    setLastSection(section);
     const saved = await writeDossierState({ lastSection: section });
     setLocalStatus(saved ? "ready" : "unavailable");
   };
 
   const clearLocalMemory = async () => {
     const cleared = await clearDossierState();
+    if (cleared) setLastSection(null);
     setLocalStatus(cleared ? "ready" : "unavailable");
   };
 
@@ -81,7 +93,7 @@ export default function Home() {
     </section>
 
     <section className="principle-section" id="produto">
-      <h2>O filme como objeto de engenharia.</h2>
+      <h2>A arquitetura do filme é o produto.</h2>
       <div className="principle-grid">
         {principles.map(({ icon: Icon, name, copy }) => <article key={name}><Icon size={23} strokeWidth={1.4} /><h3>{name}</h3><p>{copy}</p></article>)}
       </div>
@@ -122,6 +134,6 @@ export default function Home() {
     </section>
 
     <section className="final-statement"><h2>Uma camada mais clara<br />sobre o processo.</h2><button className="primary-button" onClick={() => scrollTo("top")}>Voltar ao início <ArrowDownRight size={16} /></button></section>
-    <footer><img src={assets.wordmark} alt="ClearLayer" /><span>ESTADO · EM DESENVOLVIMENTO</span><span>PORTUGAL · 2026</span><span className="local-status" aria-live="polite">{localStatus === "ready" ? "MEMÓRIA LOCAL · INDEXEDDB" : localStatus === "loading" ? "MEMÓRIA LOCAL · A VERIFICAR" : "MEMÓRIA LOCAL · INDISPONÍVEL"}</span><button className="local-clear" type="button" onClick={() => void clearLocalMemory()}>Limpar estado local</button></footer>
+    <footer><img src={assets.wordmark} alt="ClearLayer" /><span>ESTADO · EM DESENVOLVIMENTO</span><span>PORTUGAL · 2026</span><span className="local-status" aria-live="polite">{localStatus === "ready" ? "MEMÓRIA LOCAL · INDEXEDDB" : localStatus === "loading" ? "MEMÓRIA LOCAL · A VERIFICAR" : "MEMÓRIA LOCAL · INDISPONÍVEL"}</span>{lastSection && <span>ÚLTIMA SECÇÃO · {sectionLabels[lastSection] ?? lastSection}</span>}<button className="local-clear" type="button" onClick={() => void clearLocalMemory()}>Limpar estado local</button></footer>
   </main>;
 }

@@ -74,12 +74,12 @@
 - [x] Reverter a composição excessivamente alterada do slide de estrutura e voltar à hierarquia visual da referência enviada.
 - [x] Inserir apenas o conteúdo técnico compatível com a composição original, sem deslocar a imagem principal nem criar um novo layout.
 - [x] Colocar o conteúdo técnico aprofundado nas notas do slide 02 / Estrutura, preservando integralmente a composição visual da referência.
-- [ ] Atualizar o site ClearLayer para refletir a composição, linguagem e conteúdo técnico do PowerPoint.
-- [ ] Implementar IndexedDB local para preferências e estado técnico do dossier, sem armazenar dados pessoais.
-- [ ] Excluir qualquer integração com YouTube do escopo do site.
-- [ ] Inspecionar o repositório GitHub Joselio-joao/Projecto-clear-layer- e preparar a sincronização do site.
-- [ ] Validar build, dependências, segurança básica e compatibilidade com GitHub Pages.
-- [ ] Sincronizar a versão aprovada do site com o repositório GitHub e entregar a referência publicada.
+- [x] Atualizar o site ClearLayer para refletir a composição, linguagem e conteúdo técnico do PowerPoint.
+- [x] Implementar IndexedDB local para preferências e estado técnico do dossier, sem armazenar dados pessoais.
+- [x] Excluir qualquer integração com YouTube do escopo do site.
+- [x] Inspecionar o repositório GitHub Joselio-joao/Projecto-clear-layer- e preparar a sincronização do site.
+- [x] Validar build, dependências, segurança básica e documentar a limitação de GitHub Pages para o backend.
+- [x] Sincronizar a versão aprovada do site com o repositório GitHub e entregar a referência publicada.
 - [x] Validar a fidelidade visual da correção antes de entregar uma nova versão.
 - [x] Documentar a revisão visual final do slide atualizado e confirmar a entrega após essa verificação.
 - [x] Aumentar ligeiramente a separação vertical entre o título e o lead do slide de estrutura após a revisão rasterizada.
