@@ -15,37 +15,61 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    name: Deploy static HTML/CSS
+  audit:
+    name: Audit dependencies
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Assemble static site
-        run: |
-          rm -rf _site
-          mkdir -p _site/static-assets
-          cp static-site/index.html static-site/styles.css _site/
-          cp static-assets/clearlayer-wordmark.png \
-             static-assets/blueprint.png \
-             static-assets/structure.jpg \
-             static-assets/clearlayer-v2-front-reference-crop.png \
-             static-assets/clearlayer-v1-frontal-adhesive.png \
-             static-assets/clearlayer-v1-threequarter-correct.png \
-             static-assets/IMG_5131.JPG \
-             static-assets/clearlayer-v1-rimless-adhesive.png \
-             static-assets/clearlayer-profile-strip.png \
-             static-assets/clearlayer-profile-detail-sheet.png \
-             static-assets/clearlayer-logo-reference.JPG \
-             _site/static-assets/
-          touch _site/.nojekyll
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Audit production dependencies
+        continue-on-error: true
+        run: pnpm audit --prod --audit-level=high
+
+  build:
+    name: Build static site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build GitHub Pages variant
+        run: pnpm build:static
+      - name: Add Pages marker
+        run: touch dist-pages/.nojekyll
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist-pages
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
