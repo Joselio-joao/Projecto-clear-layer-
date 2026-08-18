@@ -98,8 +98,8 @@ export default function Home() {
       </div>
       <div className="hero-drawing">
         <div className="drawing-grid" />
-        <div className="drawing-placeholder" aria-label="Área de imagens removidas">IMAGENS DE PRODUTO REMOVIDAS</div>
-        <span className="drawing-tag top">IMAGEM REMOVIDA</span><span className="drawing-tag bottom">ESTRUTURA ABAIXO</span>
+        <div className="drawing-placeholder" aria-hidden="true" />
+        <span className="drawing-tag top">REFERÊNCIA · V1</span><span className="drawing-tag bottom">SUPERFÍCIE ADESIVA</span>
       </div>
     </section>
 
@@ -118,13 +118,13 @@ export default function Home() {
 
     <section className="product-images" id="imagens">
       <div className="section-head"><span>IMAGENS DE PRODUTO</span><p>As imagens de produto foram removidas nesta versão. A única referência visual preservada é a estrutura técnica em camadas.</p></div>
-      <div className="image-board image-board-empty"><p>IMAGENS DE PRODUTO REMOVIDAS</p></div>
+      <div className="image-board image-board-empty" aria-hidden="true" />
     </section>
 
     <section className="profiles-section" id="perfis">
       <div className="section-head"><span>PERFIS DE ARMAÇÃO</span><p>Quatro perfis de referência; quatro decisões que não devem ser tratadas como uma geometria única.</p></div>
       <div className="preference-strip" aria-label="Preferências locais do dossier"><label>Perfil<select value={selectedProfile} onChange={(event) => void persistPreferences({ lastProfile: event.target.value })}><option value="round">Aro redondo</option><option value="square">Aro quadrado</option><option value="aviator">Aviador</option><option value="rimless">Sem aro</option></select></label><label>Versão<select value={productVersion} onChange={(event) => void persistPreferences({ productVersion: event.target.value as "V1" | "V2" })}><option value="V1">V1 adesiva</option><option value="V2">V2 pré-conformada</option></select></label><label>Modo<select value={viewMode} onChange={(event) => void persistPreferences({ viewMode: event.target.value as "technical" | "product" })}><option value="technical">Técnico</option><option value="product">Produto</option></select></label></div>
-      <div className="profile-content"><div className="profile-diagram profile-diagram-empty" aria-label="Imagens individuais dos perfis removidas"><p>IMAGENS DE PERFIS REMOVIDAS</p></div><div className="profile-grid">{profiles.map(([profileId, number, title, status]) => <article className={selectedProfile === profileId ? "is-selected" : ""} key={profileId}><span>{number}</span><h3>{title}</h3><p>{status}</p>{title === "Sem aro" && <small><CircleAlert size={13} /> Sem aperto periférico</small>}</article>)}</div></div>
+      <div className="profile-content"><div className="profile-diagram profile-diagram-empty" aria-hidden="true" /><div className="profile-grid">{profiles.map(([profileId, number, title, status]) => <article className={selectedProfile === profileId ? "is-selected" : ""} key={profileId}><span>{number}</span><h3>{title}</h3><p>{status}</p>{title === "Sem aro" && <small><CircleAlert size={13} /> Sem aperto periférico</small>}</article>)}</div></div>
     </section>
 
     <section className="process-section" id="processo">
